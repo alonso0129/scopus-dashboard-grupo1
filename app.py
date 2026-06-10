@@ -60,7 +60,7 @@ with col3:
 # Vista previa
 st.subheader("📄 Vista previa del dataset")
 
-st.dataframe(df)
+st.dataframe(df_filtrado)
 
 # Producción científica por año
 st.subheader("📈 Producción científica por año")
@@ -72,7 +72,7 @@ st.bar_chart(articulos_anio)
 # Artículos más citados
 st.subheader("🏆 Top 10 artículos más citados")
 
-top_citados = df[["Title", "Cited by"]].sort_values(
+top_citados = df_filtrado[["Title", "Cited by"]].sort_values(
     by="Cited by",
     ascending=False
 ).head(10)
@@ -82,14 +82,14 @@ st.dataframe(top_citados)
 # Tipos de documento
 st.subheader("📄 Tipos de documento")
 
-tipos = df["Document Type"].value_counts()
+tipos = df_filtrado["Document Type"].value_counts()
 
 st.bar_chart(tipos)
 
 # Open Access
 st.subheader("🔓 Open Access")
 
-open_access = df["Open Access"].value_counts()
+open_access = df_filtrado["Open Access"].value_counts()
 
 st.bar_chart(open_access)
 
@@ -112,7 +112,7 @@ st.bar_chart(autores)
 st.subheader("🔑 Palabras clave más frecuentes")
 
 keywords = (
-    df["Author Keywords"]
+    df_filtrado["Author Keywords"]
     .dropna()
     .str.split(";")
     .explode()
@@ -122,6 +122,20 @@ keywords = (
 )
 
 st.bar_chart(keywords)
+
+st.markdown("---")
+
+st.subheader("📌 Principales hallazgos")
+
+st.write("""
+• La producción científica sobre ChatGPT y programación ha aumentado en los últimos años.
+
+• Los artículos más citados muestran un interés creciente por la inteligencia artificial aplicada a la educación.
+
+• Las palabras clave más frecuentes evidencian una fuerte relación entre ChatGPT, programación y aprendizaje universitario.
+
+• Los resultados sugieren que ChatGPT es una herramienta de apoyo para el aprendizaje de programación y el desarrollo de habilidades de resolución de problemas.
+""")
 
 # Información del proyecto
 st.markdown("---")
