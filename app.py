@@ -49,6 +49,59 @@ st.subheader("📄 Vista previa del dataset")
 
 st.dataframe(df)
 
+# Producción científica por año
+st.subheader("📈 Producción científica por año")
+
+articulos_anio = df["Year"].value_counts().sort_index()
+
+st.bar_chart(articulos_anio)
+
+# Artículos más citados
+st.subheader("🏆 Top 10 artículos más citados")
+
+top_citados = df[["Title", "Cited by"]].sort_values(
+    by="Cited by",
+    ascending=False
+).head(10)
+
+st.dataframe(top_citados)
+
+# Tipos de documento
+st.subheader("📄 Tipos de documento")
+
+tipos = df["Document Type"].value_counts()
+
+st.bar_chart(tipos)
+
+# Open Access
+st.subheader("🔓 Open Access")
+
+open_access = df["Open Access"].value_counts()
+
+st.bar_chart(open_access)
+
+# Fuentes con más publicaciones
+st.subheader("📚 Fuentes con más publicaciones")
+
+fuentes = df["Source title"].value_counts().head(10)
+
+st.bar_chart(fuentes)
+
+# Palabras clave más frecuentes
+st.subheader("🔑 Palabras clave más frecuentes")
+
+keywords = (
+    df["Author Keywords"]
+    .dropna()
+    .str.split(";")
+    .explode()
+    .str.strip()
+    .value_counts()
+    .head(15)
+)
+
+st.bar_chart(keywords)
+
 # Información del proyecto
 st.markdown("---")
 st.markdown("""
