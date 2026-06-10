@@ -52,11 +52,13 @@ with col1:
     st.metric("Artículos", df_filtrado.shape[0])
     
 with col2:
-    st.metric("Columnas", df.shape[1])
+    st.metric("Columnas", df_filtrado.shape[1])
 
 with col3:
-    st.metric("Año más reciente", int(df["Year"].max()))
-
+    st.metric(
+    "Año más reciente",
+    int(df_filtrado["Year"].max())
+)
 # Vista previa
 st.subheader("📄 Vista previa del dataset")
 
@@ -92,6 +94,17 @@ st.subheader("🔓 Open Access")
 open_access = df_filtrado["Open Access"].value_counts()
 
 st.bar_chart(open_access)
+
+# Revistas y conferencias con más publicaciones
+st.subheader("📚 Revistas y conferencias con más publicaciones")
+
+fuentes = (
+    df_filtrado["Source title"]
+    .value_counts()
+    .head(10)
+)
+
+st.bar_chart(fuentes)
 
 # Fuentes con más publicaciones
 st.subheader("👨‍🔬 Autores más productivos")
