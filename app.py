@@ -8,11 +8,59 @@ st.set_page_config(
 )
 
 # Título
-st.title("📚 Dashboard Bibliométrico")
+st.title("🤖 ChatGPT & Aprendizaje de Programación")
 
-st.subheader(
-    "¿Cómo influye el uso de ChatGPT en el aprendizaje de programación de estudiantes universitarios?"
-)
+st.caption("Análisis bibliométrico • Scopus • 2020–2026")
+
+st.markdown("""
+<div style="
+padding:20px;
+border:1px solid #ff4b8b;
+border-radius:15px;
+background-color:#111827;
+text-align:center;
+">
+
+<h4 style="color:#ff4b8b;">
+📌 PREGUNTA DE INVESTIGACIÓN
+</h4>
+
+<p style="font-size:22px;">
+¿Cómo influye el uso de ChatGPT en el aprendizaje de programación y el rendimiento académico de estudiantes universitarios?
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+with st.expander("📌 Keywords utilizadas", expanded=True):
+
+    st.markdown("""
+    <span style="background-color:#0f5132;padding:8px;border-radius:5px;">
+    ChatGPT
+    </span>
+
+    &nbsp;&nbsp;
+
+    <span style="background-color:#0f5132;padding:8px;border-radius:5px;">
+    Academic Performance
+    </span>
+
+    &nbsp;&nbsp;
+
+    <span style="background-color:#0f5132;padding:8px;border-radius:5px;">
+    Programming Education
+    </span>
+
+    &nbsp;&nbsp;
+
+    <span style="background-color:#0f5132;padding:8px;border-radius:5px;">
+    Students
+    </span>
+    """, unsafe_allow_html=True)
+
+    st.info("""
+    El análisis se basa en artículos científicos indexados en Scopus relacionados con el uso de ChatGPT en educación, programación y rendimiento académico estudiantil.
+    """)
 
 # Descripción
 st.markdown("""
