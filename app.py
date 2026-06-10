@@ -32,12 +32,25 @@ if archivo is not None:
 else:
     df = pd.read_csv("dataset_grupo1.csv")
 
+# Filtros
+st.sidebar.header("🔍 Filtros")
+
+años = sorted(df["Year"].dropna().unique())
+
+años_seleccionados = st.sidebar.multiselect(
+    "Selecciona los años",
+    años,
+    default=años
+)
+
+df_filtrado = df[df["Year"].isin(años_seleccionados)]
+
 # Métricas principales
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    st.metric("Artículos", df.shape[0])
-
+    st.metric("Artículos", df_filtrado.shape[0])
+    
 with col2:
     st.metric("Columnas", df.shape[1])
 
@@ -52,7 +65,7 @@ st.dataframe(df)
 # Producción científica por año
 st.subheader("📈 Producción científica por año")
 
-articulos_anio = df["Year"].value_counts().sort_index()
+articulos_anio = df_filtrado["Year"].value_counts().sort_index()
 
 st.bar_chart(articulos_anio)
 
@@ -81,11 +94,19 @@ open_access = df["Open Access"].value_counts()
 st.bar_chart(open_access)
 
 # Fuentes con más publicaciones
-st.subheader("📚 Fuentes con más publicaciones")
+st.subheader("👨‍🔬 Autores más productivos")
 
-fuentes = df["Source title"].value_counts().head(10)
+autores = (
+    df_filtrado["Authors"]
+    .dropna()
+    .str.split(";")
+    .explode()
+    .str.strip()
+    .value_counts()
+    .head(10)
+)
 
-st.bar_chart(fuentes)
+st.bar_chart(autores)
 
 # Palabras clave más frecuentes
 st.subheader("🔑 Palabras clave más frecuentes")
