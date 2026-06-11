@@ -76,14 +76,14 @@ st.caption("Análisis bibliométrico avanzado • Scopus • Grupo 1")
 # Pregunta de Investigación con Alto Contraste
 st.markdown("""
 <div class="research-box">
-    <div class="research-title">📌 Pregunta de Investigación</div>
+    <div class="research-title">📌 Pregunta de investigación</div>
     <div class="research-text">
         ¿Cómo influye el uso de ChatGPT en el aprendizaje de programación y el rendimiento académico de estudiantes universitarios?
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Keywords Utilizadas (Badges Limpios)
+# Keywords utilizadas (Badges Limpios)
 with st.expander("🔑 Palabras clave de búsqueda en Scopus", expanded=False):
     st.markdown("""
     <div style="margin-bottom: 10px;">
@@ -95,7 +95,7 @@ with st.expander("🔑 Palabras clave de búsqueda en Scopus", expanded=False):
     """, unsafe_allow_html=True)
     st.info("El análisis procesa literatura científica indexada en Scopus mapeando el impacto de la IA generativa en la educación informática.")
 
-# Carga de Datos
+# Carga de datos
 archivo = st.file_uploader("Cargar otro archivo CSV de Scopus (opcional)", type=["csv"])
 
 @st.cache_data
@@ -117,7 +117,7 @@ if df.empty:
 # -------------------------------------------------------------
 # FILTROS EN LA BARRA LATERAL
 # -------------------------------------------------------------
-st.sidebar.header("🔍 Filtros del Corpus")
+st.sidebar.header("🔍 Filtros")
 df["Year"] = pd.to_numeric(df["Year"], errors='coerce').fillna(2026).astype(int)
 años = sorted(df["Year"].unique())
 años_seleccionados = st.sidebar.multiselect("Selecciona los años de publicación", años, default=años)
@@ -141,9 +141,9 @@ st.markdown("---")
 # -------------------------------------------------------------
 # VISUALIZACIÓN BIBLIOMÉTRICA ORIGINAL
 # -------------------------------------------------------------
-st.header("📈 Análisis de Tendencias Básicas e Impacto")
+st.header("📈 Análisis de tendencias básicas e impacto")
 
-tab1, tab2, tab3 = st.tabs(["📊 Producción y Acceso", "🏆 Impacto y Fuentes", "🔑 Autores y Keywords"])
+tab1, tab2, tab3 = st.tabs(["📊 Producción y acceso", "🏆 Impacto y fuentes", "🔑 Autores y keywords"])
 
 with tab1:
     col_t1_1, col_t1_2 = st.columns(2)
@@ -156,7 +156,7 @@ with tab1:
     with col_t1_2:
         open_access = df_filtrado["Open Access"].fillna("No especificado").value_counts().reset_index()
         open_access.columns = ["Estatus", "Total"]
-        fig_pie = px.pie(open_access, values="Total", names="Estatus", title="Distribución de Artículos en Acceso Abierto (Open Access)", color_discrete_sequence=px.colors.sequential.RdBu)
+        fig_pie = px.pie(open_access, values="Total", names="Estatus", title="Distribución de artículos en acceso abierto (Open Access)", color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig_pie, use_container_width=True)
 
 with tab2:
